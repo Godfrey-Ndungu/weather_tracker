@@ -1,6 +1,7 @@
 from django.urls import path
 
 from .views import WeatherViewSet
+
 app_name='api'
 
 urlpatterns = [

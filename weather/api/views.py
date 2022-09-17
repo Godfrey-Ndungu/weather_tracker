@@ -8,7 +8,7 @@ from .serializers import WeatherSerializer
 class WeatherViewSet(viewsets.ViewSet):
 
     def retrieve(self, request, pk=None):
-        weather_report_test = [{"maximum": 10, "minimum": 0,"average": 4, "median": 23}] 
+        weather_report_test = {"maximum": 10, "minimum": 0,"average": 4, "median": 23}
         serializer = WeatherSerializer(weather_report_test)
         
         return Response(serializer.data)
