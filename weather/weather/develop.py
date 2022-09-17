@@ -1,4 +1,8 @@
+from pickle import FALSE
 from .base_settings import *
+
+DEBUG=FALSE
+ALLOWED_HOSTS=['*']
 
 DATABASES = {
     'default': {
@@ -6,3 +10,4 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
