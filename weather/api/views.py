@@ -13,13 +13,15 @@ class WeatherViewSet(viewsets.ViewSet):
     def retrieve(self, request,city):
         weather_api = WeatherAPI()
         days = self.request.GET["days"]
-        # check that days are numbers
+
+        # check that days are in number format
         try:
             days_value = int(days)
         except ValueError:
             return Response('Days should be an integer',status=status.HTTP_406_NOT_ACCEPTABLE)
         
         weather_report = weather_api._get_city_weather_forecast_for_specific_days(city,days)
+        
         status_code = weather_report[0]
 
         if status_code!= 200:
