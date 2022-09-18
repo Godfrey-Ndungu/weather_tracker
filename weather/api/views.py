@@ -9,9 +9,10 @@ from weather.weatherapi import WeatherAPI
 
 class WeatherViewSet(viewsets.ViewSet):
 
-    def retrieve(self, request, pk=None):
+    def retrieve(self, request,city):
         weather_api = WeatherAPI()
-        weather_report = weather_api._get_city_weather_forecast_for_specific_days('london',3)
+        days=self.request.GET["days"]
+        weather_report = weather_api._get_city_weather_forecast_for_specific_days(city,days)
         weather_report_data = weather_report[1]
         serializer = WeatherSerializer(weather_report_data)
         
