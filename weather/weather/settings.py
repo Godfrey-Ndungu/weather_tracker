@@ -1,12 +1,13 @@
+from pickle import FALSE
 from .base_settings import *
+
+DEBUG=FALSE
+ALLOWED_HOSTS=['*']
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME':config('NAME'),
-        'USER':config('NAME'),
-        'PASSWORD':config('PASSWORD'),
-        'HOST':config('HOST'),
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+

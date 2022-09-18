@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from .serializers import WeatherSerializer
 
-from weather.weatherapi import WeatherAPI
+from .weatherapi import WeatherAPI
 
 class WeatherViewSet(viewsets.ViewSet):
 
