@@ -19,20 +19,25 @@ class WeatherAPI(object):
         response = requests.get(self.api,params=payload)
         status_code = response.status_code
         data = response.json()
-        forecast = data['forecast']
-        temperatures=[]
 
-        #loop throught the days to get daily data 
-        for day in forecast['forecastday']:
-            day_temperatures=(day['day'])
-            temperatures.append(day_temperatures['maxtemp_c'])
-            temperatures.append(day_temperatures['mintemp_c'])
-        
-        maximum_temperature = max(temperatures)
-        minimum_temperature = min(temperatures)
-        average_temperature = round(statistics.mean(temperatures),2) 
-        median_temperature = statistics.median(temperatures)
- 
-        temperature_values = {"maximum":maximum_temperature, "minimum": minimum_temperature,"average":average_temperature, "median":median_temperature}
+        if status_code != 200:
+            return status_code ,data['error'] ;
+
+        else:
+            forecast = data['forecast']
+            temperatures=[]
+
+            #loop throught the days to get daily data 
+            for day in forecast['forecastday']:
+                day_temperatures=(day['day'])
+                temperatures.append(day_temperatures['maxtemp_c'])
+                temperatures.append(day_temperatures['mintemp_c'])
+            
+            maximum_temperature = max(temperatures)
+            minimum_temperature = min(temperatures)
+            average_temperature = round(statistics.mean(temperatures),2) 
+            median_temperature = statistics.median(temperatures)
+    
+            temperature_values = {"maximum":maximum_temperature, "minimum": minimum_temperature,"average":average_temperature, "median":median_temperature}
 
         return status_code ,temperature_values ;
