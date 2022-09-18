@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404
 
 from rest_framework import viewsets
+from rest_framework import status
 from rest_framework.response import Response
 
 from .serializers import WeatherSerializer
@@ -15,5 +16,7 @@ class WeatherViewSet(viewsets.ViewSet):
         weather_report = weather_api._get_city_weather_forecast_for_specific_days(city,days)
         weather_report_data = weather_report[1]
         serializer = WeatherSerializer(weather_report_data)
-        
-        return Response(serializer.data)
+        if int(days) > 14:
+            return Response(serializer.data,status=status.HTTP_206_PARTIAL_CONTENT)
+        else:
+            return Response(serializer.data)
