@@ -33,12 +33,6 @@ class WeatherAPI(object):
         average_temperature = statistics.mean(temperatures) 
         median_temperature = statistics.median(temperatures)
  
-        temperature_values = []
-        temperature_values.append(status_code)
-        temperature_values.append(maximum_temperature)
-        temperature_values.append(minimum_temperature)
-        temperature_values.append(average_temperature)
-        temperature_values.append(median_temperature)
+        temperature_values = {"maximum":maximum_temperature, "minimum": minimum_temperature,"average":average_temperature, "median":median_temperature}
 
-        return temperature_values
-
+        return status_code ,temperature_values ;
