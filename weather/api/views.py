@@ -5,10 +5,14 @@ from rest_framework.response import Response
 
 from .serializers import WeatherSerializer
 
+from weather.weatherapi import WeatherAPI
+
 class WeatherViewSet(viewsets.ViewSet):
 
     def retrieve(self, request, pk=None):
-        weather_report_test = {"maximum": 10, "minimum": 0,"average": 4, "median": 23}
-        serializer = WeatherSerializer(weather_report_test)
+        weather_api = WeatherAPI()
+        weather_report = weather_api._get_city_weather_forecast_for_specific_days('london',3)
+        weather_report_data = weather_report[1]
+        serializer = WeatherSerializer(weather_report_data)
         
         return Response(serializer.data)
