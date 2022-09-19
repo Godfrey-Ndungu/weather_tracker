@@ -9,13 +9,12 @@ from .serializers import WeatherSerializer
 
 from api.weatherapi import WeatherAPI
 
-class WeatherViewSet(viewsets.ViewSet):
 
-    def retrieve(self,request,city):
-        weather_api = WeatherAPI()
-        
+@api_view(['GET'])
+def city_weather_statistics(request,city):
+    if request.method == 'GET':
         try:
-            days = self.request.GET["days"]
+            days = request.GET["days"]
         except:
             return Response('Please Include days as query parameter',status=status.HTTP_406_NOT_ACCEPTABLE)
 
@@ -24,7 +23,8 @@ class WeatherViewSet(viewsets.ViewSet):
             days_value = int(days)
         except ValueError:
             return Response('Days should be an integer',status=status.HTTP_406_NOT_ACCEPTABLE)
-        
+            
+        weather_api = WeatherAPI()
         weather_report = weather_api._get_city_weather_forecast_for_specific_days(city,days)
         
         status_code = weather_report[0]
