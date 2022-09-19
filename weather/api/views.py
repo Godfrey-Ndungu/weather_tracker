@@ -9,10 +9,10 @@ from .serializers import WeatherSerializer
 
 from api.weatherapi import WeatherAPI
 
+
 @api_view(['GET'])
 def city_weather_statistics(request,city):
     if request.method == 'GET':
-        weather_api = WeatherAPI()
         try:
             days = request.GET["days"]
         except:
@@ -23,7 +23,8 @@ def city_weather_statistics(request,city):
             days_value = int(days)
         except ValueError:
             return Response('Days should be an integer',status=status.HTTP_406_NOT_ACCEPTABLE)
-        
+            
+        weather_api = WeatherAPI()
         weather_report = weather_api._get_city_weather_forecast_for_specific_days(city,days)
         
         status_code = weather_report[0]
