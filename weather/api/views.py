@@ -10,7 +10,7 @@ from .serializers import WeatherSerializer
 from api.weather import WeatherAPI
 
 @api_view(['GET'])
-def city_weather_statistics(request,city):
+def weather_temperatures(request,city):
     """
     This is a  view function for registering get request and returning city temperature data in json format
     
@@ -27,7 +27,7 @@ def city_weather_statistics(request,city):
     if request.method == 'GET':
         try:
             days = request.GET["days"]
-        except:
+        except :
             return Response('Please Include days as query parameter',status=status.HTTP_406_NOT_ACCEPTABLE)
 
         # check that days are in number format
@@ -37,7 +37,7 @@ def city_weather_statistics(request,city):
             return Response('Days should be an integer',status=status.HTTP_406_NOT_ACCEPTABLE)
             
         weather_api = WeatherAPI()
-        weather_report = weather_api._get_city_weather_forecast_for_specific_days(city,days)
+        weather_report = weather_api.get_city_weather_forecast_for_specific_days(city,days)
         
         status_code = weather_report[0]
 
@@ -46,6 +46,7 @@ def city_weather_statistics(request,city):
         else:        
             weather_report_data = weather_report[1]
             serializer = WeatherSerializer(weather_report_data)
+            # add custom partial content since api only support upto 14 days of weather forecast
             if int(days) > 14:
                 return Response(serializer.data,status=status.HTTP_206_PARTIAL_CONTENT)
             else:

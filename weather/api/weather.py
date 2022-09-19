@@ -20,7 +20,7 @@ class WeatherAPI():
         self.base_url = base_url
         self.api_key = api_key
 
-    def _get_city_weather_forecast_for_specific_days(self,city,days):
+    def get_city_weather_forecast_for_specific_days(self,city,days):
         """
         This is a function for getting weather forecast data for a specific city for a number of days.
         The Weather API offers a maximum number of days to be queried as 14.
