@@ -76,7 +76,14 @@ Run Server
 To run tests, run the following command
 
 ```bash
-  python3 manage.py test
+   coverage run manage.py test
+```
+## View Coverage in HTML
+
+To view code coverage, run the following command
+
+```bash
+   ccoverage html
 ```
 
 
