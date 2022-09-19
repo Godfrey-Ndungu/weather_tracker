@@ -7,8 +7,7 @@ from rest_framework.decorators import api_view
 
 from .serializers import WeatherSerializer
 
-from api.weatherapi import WeatherAPI
-
+from api.weather import WeatherAPI
 
 @api_view(['GET'])
 def city_weather_statistics(request,city):
