@@ -8,15 +8,39 @@ WEATHER_API_KEY = config('WEATHER_API_KEY')
 
 
 class WeatherAPI(object):
+    """
+    This is a class for accessing weather api and processing the data into required information.
+      
+    Attributes:
+        base_url(str): The base url accessing weather forecast in json format.
+        api_key(str): The api key for accessing weatherapi.
+    """
 
-    def __init__(self, api=WEATHER_API_BASE_URL, api_key=WEATHER_API_KEY):
-        self.api = api
+    def __init__(self, base_url=WEATHER_API_BASE_URL, api_key=WEATHER_API_KEY):
+        self.base_url = base_url
         self.api_key = api_key
 
     def _get_city_weather_forecast_for_specific_days(self,city,days):
+        """
+        This is a function for getting weather forecast data for a specific city for a number of days.
+        The Weather API offers a maximum number of days to be queried as 14.
+        
+        Parameters:
+            city (str): The city to be queried.
+            days (in): Number of days for forecast.
+          
+        Returns:
+            status_code (int): The request status code.
+            maximum (dic): Maximum temperature for given days.
+            minimum(dic): Minimum temperature for given days.
+            median (dic): Median temperature for given days.
+            average (dic): Average temperature for given days at 2 decimal points.
+            
+        """
+        
         # Request forecast for a particluar city for certain days
         payload = {'key': self.api_key, 'q':city,'days':days}
-        response = requests.get(self.api,params=payload)
+        response = requests.get(self.base_url,params=payload)
         status_code = response.status_code
         data = response.json()
 
