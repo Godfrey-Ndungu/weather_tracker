@@ -30,11 +30,15 @@ class WeatherAPI(object):
             days (in): Number of days for forecast.
           
         Returns:
-            status_code (int): The request status code.
-            maximum (dic): Maximum temperature for given days.
-            minimum(dic): Minimum temperature for given days.
-            median (dic): Median temperature for given days.
-            average (dic): Average temperature for given days at 2 decimal points.
+            success:status_code (int): The request status code.
+                    maximum (dic): Maximum temperature for given days.
+                    minimum(dic): Minimum temperature for given days.
+                    median (dic): Median temperature for given days.
+                    average (dic): Average temperature for given days at 2 decimal points.
+            notsuccess:
+                    status_code (int): The request status code.
+                    error(dic):Error infromation from weather API
+                    
             
         """
         

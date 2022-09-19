@@ -11,6 +11,19 @@ from api.weather import WeatherAPI
 
 @api_view(['GET'])
 def city_weather_statistics(request,city):
+    """
+    This is a  view function for registering get request and returning city temperature data in json format
+    
+    Parameters:
+        city (str): The city to be queried.
+    Returns:
+        success:status_code (int): The request status code.
+                response(dic): This has maximum.minimum,average and median value
+        notsuccess:
+                status_code (int): The request status code.
+                response(dic): Error Message
+        
+    """
     if request.method == 'GET':
         try:
             days = request.GET["days"]
