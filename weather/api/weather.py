@@ -7,7 +7,7 @@ WEATHER_API_BASE_URL = "http://api.weatherapi.com/v1/forecast.json"
 WEATHER_API_KEY = config('WEATHER_API_KEY')
 
 
-class WeatherAPI(object):
+class WeatherAPI():
     """
     This is a class for accessing weather api and processing the data into required information.
       
@@ -66,6 +66,9 @@ class WeatherAPI(object):
             average_temperature = round(statistics.mean(temperatures),2) 
             median_temperature = statistics.median(temperatures)
     
-            temperature_values = {"maximum":maximum_temperature, "minimum": minimum_temperature,"average":average_temperature, "median":median_temperature}
+            temperature_values = {"maximum":maximum_temperature, 
+                                    "minimum": minimum_temperature,
+                                    "average":average_temperature, 
+                                    "median":median_temperature}
 
         return status_code ,temperature_values ;
