@@ -27,7 +27,7 @@ def weather_temperatures(request,city):
     if request.method == 'GET':
         try:
             days = request.GET["days"]
-        except:
+        except :
             return Response('Please Include days as query parameter',status=status.HTTP_406_NOT_ACCEPTABLE)
 
         # check that days are in number format
@@ -46,6 +46,7 @@ def weather_temperatures(request,city):
         else:        
             weather_report_data = weather_report[1]
             serializer = WeatherSerializer(weather_report_data)
+            # add custom partial content since api only support upto 14 days of weather forecast
             if int(days) > 14:
                 return Response(serializer.data,status=status.HTTP_206_PARTIAL_CONTENT)
             else:
